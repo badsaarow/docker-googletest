@@ -1,9 +1,10 @@
 FROM ubuntu:latest
 
-LABEL maintainer "srz_zumix <https://github.com/srz-zumix>"
-
+ENV TZ='Asia/Seoul'
+ENV DEBIAN_FRONTEND="noninteractive"
 ARG BRANCH_OR_TAG=master
-RUN env \
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+RUN  env \
   && apt-get update \
   && apt-get install -q -y git cmake make g++ lcov \
   && apt-get clean \
