@@ -41,10 +41,4 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: srzzumix/googletest:${{ needs.prepare.outputs.tagname }}
-      - name: Push to Docker Hub (alpine)
-        uses: docker/build-push-action@v2
-        with:
-          context: alpine
-          push: true
-          tags: srzzumix/googletest:${{ needs.prepare.outputs.tagname }}-alpine
+          tags: sungyong/gtest:${{ needs.prepare.outputs.tagname }}
