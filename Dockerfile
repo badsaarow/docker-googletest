@@ -1,8 +1,11 @@
-FROM ubuntu:latest
+FROM ubuntu:20.04
+
+ARG BRANCH_OR_TAG=master
+ARG CMAKE_OPTIONS=
 
 ENV TZ='Asia/Seoul'
 ENV DEBIAN_FRONTEND="noninteractive"
-ARG BRANCH_OR_TAG=master
+
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN  env \
   && apt-get update \
