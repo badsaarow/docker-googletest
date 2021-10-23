@@ -1,9 +1,3 @@
-# Makefile
-all: mock_c
-
-mock_c: async_test.cpp
-	g++ -o mock_c async_test.cpp -lgcov -fprofile-arcs -ftest-coverage -lgtest -lgtest_main -lpthread -lgmock
-	./mock_c
-
-clean:
-	rm -rf *.o *.gcda *.gcno *.lcov coverage mock_c
+OUT = Test
+$(OUT): async_test.cpp
+	g++ -o $(OUT) async_test.cpp -std=c++11 -lgtest -lgtest_main -lgmock -lpthread
