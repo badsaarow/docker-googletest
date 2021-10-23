@@ -8,6 +8,7 @@ RUN  env \
   && apt-get update \
   && apt-get install -q -y git cmake make g++ lcov \
   && apt-get install -q -y zsh curl wget \
+  && apt-get install -q -y gettext-base jq curl \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
@@ -17,7 +18,7 @@ RUN chsh -s /usr/bin/zsh \
 RUN git clone --depth=1 -b $BRANCH_OR_TAG -q https://github.com/google/googletest.git /googletest
 RUN mkdir -p /googletest/build
 WORKDIR /googletest/build
-RUN cmake .. && make && make install
+RUN cmake .. ${CMAKE_OPTIONS} && make && make install
 RUN mkdir -p /code
 WORKDIR /code
 RUN rm -rf /googletest
