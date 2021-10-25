@@ -1,0 +1,1 @@
+int check_average(int idx);
