@@ -23,7 +23,7 @@ RUN cd abseil-cpp \
   && cmake -DBUILD_TESTING=ON -DABSL_USE_GOOGLETEST_HEAD=ON -DCMAKE_CXX_STANDARD=11 \
   && make && make install \
   && cd googletest-build \
-  && make && make install 
+  && make && make install \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* \
   && mkdir -p /code
