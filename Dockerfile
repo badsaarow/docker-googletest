@@ -24,15 +24,18 @@ RUN chsh -s /usr/bin/zsh \
   && curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh \
   && curl https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.ansi-dark --output ~/.dircolors
 
-RUN git clone -q https://github.com/abseil/abseil-cpp.git /abseil-cpp
+RUN git clone -q https://github.com/abseil/abseil-cpp.git /abseil-cpp \
+  && git clone -q https://github.com/google/googletest.git /googletest
+  
 WORKDIR /
 RUN cd abseil-cpp \
   && cmake -DBUILD_TESTING=ON -DABSL_USE_GOOGLETEST_HEAD=ON -DCMAKE_CXX_STANDARD=14 \
   && make \
   && make install \
-  # && cd googletest \
-  # && make \
-  # && make install \
+  && cd /googletest \
+  && cmake . \
+  && make \
+  && make install \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* \
   && mkdir -p /code
