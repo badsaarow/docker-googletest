@@ -1,0 +1,5 @@
+FROM sungyong/gtest:latest
+
+RUN apt-get update \
+  && apt-get install -q -y python-is-python3 pip golang  nodejs
+RUN npm install -g adr-tools tig nvm npx yarn
