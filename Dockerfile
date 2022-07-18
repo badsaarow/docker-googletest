@@ -10,7 +10,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN  env \
   && apt-get update \
   && apt-get install -q -y git cmake make g++ lcov \
-  && apt-get install -q -y zsh curl wget vi nano btop htop \
+  && apt-get install -q -y zsh curl wget vim nano btop htop \
   && apt-get install -q -y ca-certificates curl gnupg lsb-release
 
 RUN mkdir -p /etc/apt/keyrings \
