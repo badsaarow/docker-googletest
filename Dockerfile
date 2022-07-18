@@ -20,14 +20,14 @@ RUN chsh -s /usr/bin/zsh \
 RUN git clone -q https://github.com/abseil/abseil-cpp.git /abseil-cpp
 WORKDIR /
 RUN cd abseil-cpp \
-  cmake -DBUILD_TESTING=ON -DABSL_USE_GOOGLETEST_HEAD=ON -DCMAKE_CXX_STANDARD=11 \
-  make \
-  make install \
-  cd googletest \
-  make \
-  make install \
-  apt-get clean \
-  rm -rf /var/lib/apt/lists/* \
-  mkdir -p /code
+  && cmake -DBUILD_TESTING=ON -DABSL_USE_GOOGLETEST_HEAD=ON -DCMAKE_CXX_STANDARD=11 \
+  && make \
+  && make install \
+  && cd googletest \
+  && make \
+  && make install \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/* \
+  && mkdir -p /code
 WORKDIR /code
 # RUN rm -rf /googletest
