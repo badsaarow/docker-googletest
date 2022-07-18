@@ -7,8 +7,7 @@ ENV TZ='Asia/Seoul'
 ENV DEBIAN_FRONTEND="noninteractive"
 
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-RUN  env \
-  && apt-get update \
+RUN apt-get update \
   && apt-get install -q -y git cmake make g++ lcov \
   && apt-get install -q -y zsh curl wget vim nano btop htop \
   && apt-get install -q -y ca-certificates curl gnupg lsb-release
@@ -19,6 +18,13 @@ RUN mkdir -p /etc/apt/keyrings \
 
 RUN apt-get update \
   && apt-get install -q -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+
+RUN apt-get install -q -y python-is-python3 pip golang adr-tools tig nodejs node
+
+RUN curl -fsSL https://tailscale.com/install.sh | sh \
+  && curl -s https://install.zerotier.com | sh \
+  && /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" \
+  && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" >> $HOME/.zprofile
 
 RUN chsh -s /usr/bin/zsh \
   && curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh \
