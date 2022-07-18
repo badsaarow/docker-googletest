@@ -10,8 +10,16 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN  env \
   && apt-get update \
   && apt-get install -q -y git cmake make g++ lcov \
-  && apt-get install -q -y zsh curl wget
+  && apt-get install -q -y zsh curl wget vi nano btop htop \
+  && apt-get install -q -y ca-certificates curl gnupg lsb-release
 
+RUN mkdir -p /etc/apt/keyrings \
+  && url -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg \
+  && echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  && $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+RUN apt-get update \
+  && apt-get install -q -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
 RUN chsh -s /usr/bin/zsh \
   && curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh \
@@ -23,9 +31,9 @@ RUN cd abseil-cpp \
   && cmake -DBUILD_TESTING=ON -DABSL_USE_GOOGLETEST_HEAD=ON -DCMAKE_CXX_STANDARD=14 \
   && make \
   && make install \
-  && cd googletest \
-  && make \
-  && make install \
+  # && cd googletest \
+  # && make \
+  # && make install \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* \
   && mkdir -p /code
