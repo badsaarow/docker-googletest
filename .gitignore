@@ -3,3 +3,6 @@ gtest/
 *.lcov
 *.gcov
 *.o
+*.gcno
+*.gcda
+coverage/

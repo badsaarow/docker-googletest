@@ -1,7 +1,8 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 #include "EventDispatcher.h"
-#include "absl/Notification/Notify.h"
+#include <absl/synchronization/notification.h>
+
 //CAUTION! should use abseil contained gTest library
 class MockEventDispatcher : public EventDispatcher {
   MOCK_METHOD(bool, DispatchEvent, (int), (override));
