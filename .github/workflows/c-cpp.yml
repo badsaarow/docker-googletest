@@ -9,12 +9,12 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     steps:
     - uses: actions/checkout@v2
     - name: make
-      run: make --directory=./sample/async
+      run: make --directory=./sample/1_helloworld
     - name: execute
-      run: /code/sample/async/Test
+      run: /code/sample/1_helloworld/total_test
 
