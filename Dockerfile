@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
 ARG BRANCH_OR_TAG=main
 ARG CMAKE_OPTIONS=
@@ -20,7 +20,7 @@ RUN chsh -s /usr/bin/zsh \
 RUN git clone -q https://github.com/abseil/abseil-cpp.git /abseil-cpp
 WORKDIR /
 RUN cd abseil-cpp \
-  && cmake -DBUILD_TESTING=ON -DABSL_USE_GOOGLETEST_HEAD=ON -DCMAKE_CXX_STANDARD=11 \
+  && cmake -DBUILD_TESTING=ON -DABSL_USE_GOOGLETEST_HEAD=ON -DCMAKE_CXX_STANDARD=14 \
   && make \
   && make install \
   && cd googletest \
