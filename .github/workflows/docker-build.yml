@@ -16,9 +16,10 @@ jobs:
           NAME_=${REF#refs/heads/}
           NAME=${NAME_#refs/tags/}
           if [ "$NAME" = "master" ]; then
-            echo "##[set-output name=tagname;]$(echo latest)"
+            echo "{name}={tagname}" >> $GITHUB_OUTPUT
+            echo "{name}=latest" >> $GITHUB_OUTPUT
           else
-            echo "##[set-output name=tagname;]$(echo ${NAME})"
+            echo "{name}=${NAME}" >> $GITHUB_OUTPUT
           fi
       - run: |
           echo ${{ steps.create_tagname.outputs.tagname }}
