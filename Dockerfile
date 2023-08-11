@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu:22.04.2
 
 ARG BRANCH_OR_TAG=main
 ARG CMAKE_OPTIONS=
@@ -19,16 +19,7 @@ RUN mkdir -p /etc/apt/keyrings \
 RUN apt-get update \
   && apt-get install -q -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
-RUN apt-get install -q -y python-is-python3 pip golang adr-tools tig nodejs node
-
-RUN curl -fsSL https://tailscale.com/install.sh | sh \
-  && curl -s https://install.zerotier.com | sh \
-  && /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" \
-  && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" >> $HOME/.zprofile
-
-RUN chsh -s /usr/bin/zsh \
-  && curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh \
-  && curl https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.ansi-dark --output ~/.dircolors
+RUN apt-get install -q -y python-is-python3 pip golang adr-tools tig nodejs build-essential
 
 RUN git clone -q https://github.com/abseil/abseil-cpp.git /abseil-cpp \
   && git clone -q https://github.com/google/googletest.git /googletest
