@@ -1,4 +1,4 @@
-FROM ubuntu:22.04.2
+FROM ubuntu:22.04
 
 ARG BRANCH_OR_TAG=main
 ARG CMAKE_OPTIONS=
